@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body,html{
+				width: 100%;
+				height: 100%;
+			}
+			div{
+				position: absolute;
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+	</body>
+	<script>
+		function shuiji(min,max){
+			return parseInt(Math.random()*(max-min+1)+min);
+		}
+		function Yun(){
+			this.w = shuiji(10,40);
+			this.x = shuiji(0,innerWidth-this.w);
+			this.y = shuiji(0,innerHeight-this.w);
+			this.color = "rgb("+shuiji(0,255)+","+shuiji(0,255)+","+shuiji(0,255)+")";
+		}
+        Yun.prototype.Fei=function(){
+            this.odiv = document.createElement("div");
+//          this.odiv.style.left = this.x+"px";
+//           this.odiv.style.top = this.y+"px";
+            this.odiv.style.width = this.w+"px";
+            this.odiv.style.height = this.w+"px";
+            this.odiv.style.background = this.color;
+            var body = document.querySelector("body");
+            body.appendChild( this.odiv);
+        }
+        Yun.prototype.dong=function(){
+           var self = this;
+           var a = shuiji(10,50);
+           var b = shuiji(10,50);
+           setInterval(function(){
+           	 self.odiv.style.left =  self.odiv.offsetLeft+a+"px"
+           	 self.odiv.style.top =  self.odiv.offsetTop+b+"px"
+           	 if(self.odiv.offsetLeft>innerWidth-self.w){
+           	 	a=-a
+           	 }else if(self.odiv.offsetLeft<0){
+           	 	a=-a;
+           	 }
+           	 if(self.odiv.offsetTop>innerHeight-self.w){
+           	 	b=-b;
+           	 }else if(self.odiv.offsetTop<0){
+           	 	b=-b;
+           	 }
+           	 console.log(11)
+           },100)
+//console.log(self.odiv.offsetLeft)
+        }
+       var a = shuiji(500,1000)
+    
+        for(var i=0;i<20;i++){
+      
+	        var bbb = setTimeout(function(){
+	             var yun = new Yun();
+	        	 yun.Fei();
+	             yun.dong()
+	        },a)
+        	 
+        }
+ 
+         
+//  
+	</script>
+</html>
